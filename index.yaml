@@ -9,6 +9,6 @@ entries:
     name: daedalus-ai
     type: application
     urls:
-    - releases/daedalus-ai-1.0.0.tgz
+    - https://github.com/DaedalusHub/helm-charts/blob/main/releases/daedalus-ai-1.0.0.tgz
     version: 1.0.0
 generated: "2023-05-01T22:03:02.705963222-07:00"
