@@ -16,7 +16,7 @@ deployment:
     threads: 14
     contextSize: 512
     modelsPath: "/models"
-# Optionally create a PVC, mount the PV to the LocalAI Deployment,
+# Optionally create a PVC, mount the PV to the DaedalusAI Deployment,
 # and download a model to prepopulate the models directory
 modelsVolume:
   enabled: true
