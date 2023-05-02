@@ -11,13 +11,9 @@ spec:
   externalTrafficPolicy: Cluster
   selector:
     app.kubernetes.io/name: {{ include "daedalus-ai.name" . }}
-  type: "{{ .Values.service.type }}"
+  type: {{ toYaml .Values.service.type }}
   ports:
-    - name: http
-      port: 80
-      protocol: TCP
-      targetPort: http
-    - name: https
-      port: 443
-      protocol: TCP
-      targetPort: https
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: http

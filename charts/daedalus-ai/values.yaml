@@ -25,5 +25,5 @@ modelsTemplate:
 service:
   type: LoadBalancer
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: "models.daedalushub.com"
-    service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "1200"
+    external-dns.alpha.kubernetes.io/hostname: models.daedalushub.com
+    service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: 1200
