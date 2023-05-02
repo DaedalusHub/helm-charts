@@ -35,6 +35,7 @@ Common labels
 */}}
 {{- define "daedalus-ai.labels" -}}
 helm.sh/chart: {{ include "daedalus-ai.chart" . }}
+app: {{ include "daedalus-ai.name" . }}
 app.kubernetes.io/name: {{ include "daedalus-ai.name" . }}
 app.kubernetes.io/instance: "{{ .Release.Name }}"
 app.kubernetes.io/managed-by: {{ .Release.Service }}
