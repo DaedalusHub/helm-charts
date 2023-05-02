@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "daedalus-ai.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "daedalus-ai.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "daedalus-ai.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  replicas: 1
+  template:
+    metadata:
+      name: {{ template "daedalus-ai.fullname" . }}
+      labels:
+        app.kubernetes.io/name: {{ include "daedalus-ai.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      {{- if .Values.modelsVolume.enabled }}
+      initContainers:
+        - name: download-model
+          image: busybox
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              url={{ .Values.modelsVolume.url | quote }}
+              if [[ ! -f "{{ .Values.deployment.env.modelsPath }}/${url##*/}" ]]; then
+                wget {{ .Values.modelsVolume.url }} -P {{ .Values.deployment.env.modelsPath }} {{ if .Values.modelsVolume.auth.basic }}--header "Authorization: Basic {{ .Values.modelsVolume.auth.basic }}"{{ end }}
+                wget {{ .Values.modelsTemplate.url }} -O {{ .Values.deployment.env.modelsPath }}/{{ .Values.modelsTemplate.name }}
+              fi
+          volumeMounts:
+          - mountPath: {{ .Values.deployment.env.modelsPath }}
+            name: models
+      {{- end }}
+      containers:
+        - name: {{ template "daedalus-ai.fullname" . }}
+          image: {{ .Values.deployment.image }}
+          env:
+          - name: THREADS
+            value: {{ .Values.deployment.env.threads | quote }}
+          - name: CONTEXT_SIZE
+            value: {{ .Values.deployment.env.contextSize | quote }}
+          - name: MODELS_PATH
+            value: {{ .Values.deployment.env.modelsPath }}
+          volumeMounts:
+          - mountPath: {{ .Values.deployment.env.modelsPath }}
+            name: models
+      volumes:
+      - name: models
+        persistentVolumeClaim:
+          claimName: {{ template "daedalus-ai.fullname" . }}
