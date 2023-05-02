@@ -8,10 +8,16 @@ metadata:
   annotations:
     {{ toYaml .Values.service.annotations | indent 4 }}
 spec:
+  externalTrafficPolicy: Cluster
   selector:
     app.kubernetes.io/name: {{ include "daedalus-ai.name" . }}
   type: "{{ .Values.service.type }}"
   ports:
-    - protocol: TCP
-      port: 8080
-      targetPort: 8080
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: https
