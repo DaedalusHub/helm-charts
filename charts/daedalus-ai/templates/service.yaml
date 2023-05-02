@@ -4,11 +4,9 @@ metadata:
   name: {{ template "daedalus-ai.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
-    {{- include "daedalus-ai.labels" . | nindent 4 }}
-{{- if .Values.service.annotations }}
+    {{ include "daedalus-ai.labels" . | nindent 4 }}
   annotations:
-  {{ toYaml .Values.service.annotations | indent 4 }}
-{{- end }}
+    {{ include "toYaml" .Values.service.annotations | indent 4 }}
 spec:
   selector:
     app.kubernetes.io/name: {{ include "daedalus-ai.name" . }}

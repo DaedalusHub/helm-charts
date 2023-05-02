@@ -9,20 +9,21 @@ deployment:
 # and download a model to prepopulate the models directory
 modelsVolume:
   enabled: true
-  url: "https://gpt4all.io/models/ggml-gpt4all-j-v1.3-groovy.bin"
+  url: "https://huggingface.co/eachadea/ggml-vicuna-7b-1.1/resolve/main/ggml-vic7b-q5_0.bin"
   pvc:
-    size: 8Gi
+    size: 20Gi
     accessModes:
-    - ReadWriteOnce
+      - ReadWriteOnce
   auth:
     # Optional value for HTTP basic access authentication header
     basic: "" # 'username:password' base64 encoded
 
 modelsTemplate:
-  name: "ggml-gpt4all-j-v1.3-groovy.bin.tmpl"
-  url: "https://github.com/brianhammons/LocalAI/raw/master/prompt-templates/ggml-gpt4all-j.tmpl"
+  name: "ggml-vic7b-q5_0.bin.tmpl"
+  url: "https://github.com/brianhammons/LocalAI/raw/master/prompt-templates/vicuna.tmpl"
 
 service:
   type: LoadBalancer
   annotations:
+    external-dns.alpha.kubernetes.io/hostname: "models.daedalushub.com"
     service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "1200"

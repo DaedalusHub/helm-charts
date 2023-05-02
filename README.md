@@ -20,7 +20,7 @@ deployment:
 # and download a model to prepopulate the models directory
 modelsVolume:
   enabled: true
-  url: "https://gpt4all.io/models/ggml-gpt4all-j.bin"
+  url: "https://huggingface.co/eachadea/ggml-vicuna-7b-1.1/resolve/main/ggml-vic7b-q5_0.bin"
   pvc:
     size: 6Gi
     accessModes:
@@ -35,5 +35,5 @@ service:
 ```
 Install the DaedalusAI chart:
 ```bash
-helm install daedalus-ai daedalushub/daedalus-ai -f values.yaml
+helm install daedalus-ai daedalushub/local-ai -f charts/daedalus-ai/values.yaml
 ```
