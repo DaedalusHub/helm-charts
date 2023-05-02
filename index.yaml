@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  local-ai:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-05-01T20:29:42.552310424Z"
+    description: A Helm chart for DaedalusAI
+    name: daedalus-ai
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/DaedalusHub/helm-charts/releases/daedalus-ai-1.0.0.tgz
+    version: 1.0.0
+generated: "2023-05-01T20:29:42.552310424Z"
