@@ -4,17 +4,16 @@ metadata:
   name: {{ template "daedalus-ai.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
-    {{ include "daedalus-ai.labels" . | nindent 4 }}
+    {{- include "daedalus-ai.labels" . | nindent 4 }}
 {{- if .Values.service.annotations }}
   annotations:
   {{ toYaml .Values.service.annotations | indent 4 }}
 {{- end }}
 spec:
-  externalTrafficPolicy: Cluster
   selector:
     app.kubernetes.io/name: {{ include "daedalus-ai.name" . }}
-  type: {{ toYaml .Values.service.type }}
+  type: "{{ .Values.service.type }}"
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
