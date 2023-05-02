@@ -35,5 +35,5 @@ service:
 ```
 Install the DaedalusAI chart:
 ```bash
-helm install daedalus-ai DaedalusHub/daedalus-ai -f values.yaml
+helm install daedalus-ai daedalushub/daedalus-ai -f values.yaml
 ```
