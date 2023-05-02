@@ -20,7 +20,7 @@ modelsVolume:
 
 modelsTemplate:
   name: "ggml-gpt4all-j-v1.3-groovy.bin.tmpl"
-  url: "https://raw.githubusercontent.com/brianhammons/LocalAI/master/prompt-templates/ggml-gpt4all-j.tmpl"
+  url: "https://github.com/brianhammons/LocalAI/raw/master/prompt-templates/ggml-gpt4all-j.tmpl"
 
 service:
   type: LoadBalancer
