@@ -14,6 +14,6 @@ spec:
     app.kubernetes.io/name: {{ include "daedalus-ai.name" . }}
   type: "{{ .Values.service.type }}"
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
+    - protocol: TCP 
+      port: 8080
+      targetPort: 8080
