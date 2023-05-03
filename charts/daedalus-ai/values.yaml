@@ -25,4 +25,5 @@ modelsTemplate:
 service:
   type: LoadBalancer
   annotations:
-    service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "1200"
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
